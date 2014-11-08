@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://cdn-files.deezer.com/js/min/dz-v00202681.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="js/deezerPlayer.js"></script>
+    <script src="js/deezerPlayer.services.js"></script>
+    <script src="js/deezerPlayer.controllers.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Josefin+Sans:100,400' rel='stylesheet' type='text/css'>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body ng-app="deezerPlayer" ng-controller="dzController">
+<div id="dz-root"></div>
+<div class="player">
+    <div class="media" ng-style="mediaBg">
+        <div class="thumbnail">
+            <img ng-src="{{playing.album.cover}}" alt=""/>
+        </div>
+        <div class="playing-info">
+            <h2>{{playing.song}}</h2>
+            <h3>{{playing.artist.name}}</h3>
+        </div>
+    </div>
+    <div class="controls">
+        <div class="control">
+            <i class="fa fa-step-backward"></i>
+
+            <div class="control-title">PREV</div>
+        </div>
+        <div class="control">
+            <i class="fa fa-play"></i>
+
+            <div class="control-title">PLAY</div>
+        </div>
+        <div class="control">
+            <i class="fa fa-step-forward"></i>
+
+            <div class="control-title">NEXT</div>
+        </div>
+        <div class="control selected">
+            <i class="fa fa-stop"></i>
+
+            <div class="control-title">STOP</div>
+        </div>
+        <span class="menu-item" ng-class="{selected: (menuSelected=='radio')}" ng-click="menuSelect('radio')">Radio</span>
+        <span class="menu-item" ng-class="{selected: (menuSelected=='genres')}" ng-click="menuSelect('genres')">Genres</span>
+        <span class="menu-item" ng-class="{selected: (menuSelected=='artists')}" ng-click="menuSelect('artists')">Artists</span>
+        <span class="menu-item" ng-class="{selected: (menuSelected=='songs')}" ng-click="menuSelect('songs')">Songs</span>
+    </div>
+</div>
+<div class="listing">
+
+    <div class="station-item" ng-repeat="station in stations" ng-click="playRadio(station)">
+        <img ng-src="{{station.picture}}" alt=""/>
+
+        <div class="station-title">{{station.title}}</div>
+    </div>
+    <div class="listing-clear"></div>
+</div>
+</body>
+</html>
+
+<iframe id="dzplayer" name="dzplayer" frameborder="no" scrolling="no"
+src="http://www.deezer.com/plugins/player.php?channel=http://developers.deezer.com/examples/channel.php&amp;app_id=1&amp;emptyPlayer=true"
+        style="position: absolute; width: 10px; height: 20px; border: 0px solid black; background-color: transparent;">
+</iframe>
